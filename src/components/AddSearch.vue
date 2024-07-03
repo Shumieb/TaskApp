@@ -21,7 +21,6 @@ const handleBtnSwitch = (value) => {
 const handleSubmit = () => {
   if (selected.value == "add" && inputValue.value !== undefined) {
     props.addTask(inputValue.value);
-    //console.log(inputValue.value + " - " + selected.value);
   }
   if (selected.value == "search" && inputValue.value !== undefined) {
     console.log(inputValue.value + " - " + selected.value);

@@ -1,7 +1,7 @@
 <script setup>
 import Task from './Task.vue'
 
-const props = defineProps(["tasks", "handleEdit", "handleComplete", "handleDelete"])
+const props = defineProps(["tasks","handleComplete", "handleDelete", "showEditForm"])
 
 </script>
 
@@ -12,9 +12,9 @@ const props = defineProps(["tasks", "handleEdit", "handleComplete", "handleDelet
       <li v-for="task in props.tasks" :key="task.id">
         <Task 
           :task="task" 
-          :handleEdit="props.handleEdit" 
           :handleComplete="props.handleComplete"
           :handleDelete="props.handleDelete"
+          :showEditForm="props.showEditForm"
         />      
       </li>          
     </ul>

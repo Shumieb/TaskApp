@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["task", "handleEdit", "handleComplete", "handleDelete"])
+const props = defineProps(["task", "handleComplete", "handleDelete", "showEditForm"])
 
 </script>
 
@@ -8,13 +8,13 @@ const props = defineProps(["task", "handleEdit", "handleComplete", "handleDelete
         <div class="textSect">
             <input 
                 type="checkbox" 
-                name="taskOne" 
+                :name="props.task.name" 
                 :checked="props.task.completed"  
                 @click="() => props.handleComplete(props.task.id)">
             <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
-          <button class="btn" @click="()=>props.handleEdit(props.task.id)">Edit</button>
+          <button class="btn" @click="()=>props.showEditForm(props.task.id)">Edit</button>
           <button class="btn" @click="()=>props.handleDelete(props.task.id)">Delete</button>
         </div>
     </div>
