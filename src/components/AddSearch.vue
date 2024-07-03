@@ -17,10 +17,10 @@ const handleBtnSwitch = (value) => {
 };
 
 const handleSubmit = () => {
-  if (selected.value == "add") {
+  if (selected.value == "add" && inputValue.value !== undefined) {
     console.log(inputValue.value + " - " + selected.value);
   }
-  if (selected.value == "search") {
+  if (selected.value == "search" && inputValue.value !== undefined) {
     console.log(inputValue.value + " - " + selected.value);
   }
 };
@@ -68,6 +68,11 @@ section {
   margin: auto;
   border-radius: 4px;
   margin-bottom: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
+}
+
+section:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 6px;
 }
 
 .btn-sect {
@@ -85,6 +90,11 @@ section {
   background-color: white;
   border-radius: 4px;
   font-size: 16px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
+}
+
+.btn:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 6px;
 }
 
 .add-search-form {
