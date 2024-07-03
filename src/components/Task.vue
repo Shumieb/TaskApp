@@ -1,18 +1,23 @@
 <script setup>
+const props = defineProps(["task", "handleEdit", "handleComplete", "handleDelete"])
 
 </script>
 
 <template>
-    <li class="task">
+    <div class="task">
         <div class="textSect">
-            <input type="checkbox" name="taskOne">
-            <p>Task One</p>
+            <input 
+                type="checkbox" 
+                name="taskOne" 
+                :checked="props.task.completed"  
+                @click="() => props.handleComplete(props.task.id)">
+            <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
-          <button class="btn">Edit</button>
-          <button class="btn">Delete</button>
+          <button class="btn" @click="()=>props.handleEdit(props.task.id)">Edit</button>
+          <button class="btn" @click="()=>props.handleDelete(props.task.id)">Delete</button>
         </div>
-      </li>
+    </div>
 </template>
 
 <style scoped>
@@ -39,6 +44,10 @@
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+}
+
+.task-name{
+    text-transform: capitalize;
 }
 
 .btnSect{

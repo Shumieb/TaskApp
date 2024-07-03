@@ -1,6 +1,6 @@
 <script setup>
 import { ref, defineModel } from "vue";
-import { capitalizeFirstLetter } from "../assets/utils";
+import { capitalizeFirstLetter } from "@/assets/utils";
 
 const selected = ref("add");
 const disabled = ref(selected.value);
@@ -8,6 +8,8 @@ const placeholder = ref(capitalizeFirstLetter(selected.value));
 const submitBtn = ref(capitalizeFirstLetter(selected.value));
 
 const inputValue = defineModel();
+
+const props = defineProps(["addTask"])
 
 const handleBtnSwitch = (value) => {
   selected.value = value;
@@ -18,7 +20,8 @@ const handleBtnSwitch = (value) => {
 
 const handleSubmit = () => {
   if (selected.value == "add" && inputValue.value !== undefined) {
-    console.log(inputValue.value + " - " + selected.value);
+    props.addTask(inputValue.value);
+    //console.log(inputValue.value + " - " + selected.value);
   }
   if (selected.value == "search" && inputValue.value !== undefined) {
     console.log(inputValue.value + " - " + selected.value);
@@ -45,7 +48,7 @@ const handleSubmit = () => {
       </button>
     </div>
     <div>
-      <form class="add-search-form" @submit.prevent="handleSubmit">
+      <form class="add-search-form" @submit.prevent="handleSubmit" autocomplete="off">
         <input
           class="add-search-input"
           type="text"
