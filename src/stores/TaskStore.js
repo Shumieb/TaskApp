@@ -2,7 +2,7 @@ import { taskData } from "@/assets/data";
 import { defineStore } from 'pinia'
 import { ref, computed } from "vue";
 
-export const useTaskStore = defineStore('task', () => {
+export const useTaskStore = defineStore('myTask', () => {
     // state properties
     const tasks = ref(taskData);
     const displayEditFrom = ref(false);
@@ -12,16 +12,6 @@ export const useTaskStore = defineStore('task', () => {
     // getters
     const getAllTasks = computed(() => {
         return tasks.value;
-    })
-
-    const getCompletedTasks = computed(() => {
-        let completedTasks = tasks.value.filter(task => task.completed == true);
-        return completedTasks;
-    })
-
-    const getPendingTasks = computed(() => {
-        let pendingTasks = tasks.value.filter(task => task.completed !== true);
-        return pendingTasks;
     })
 
     const getTaskToEdit = computed(() => {
@@ -82,8 +72,9 @@ export const useTaskStore = defineStore('task', () => {
     }
 
     function changeTaskFilter(filter) {
-        if (filter == "all" || filter == "pending" || filter == "completed")
+        if (filter == "all" || filter == "pending" || filter == "completed") {
             taskFilter.value = filter;
+        }
     }
 
     return {
@@ -92,10 +83,8 @@ export const useTaskStore = defineStore('task', () => {
         taskToEdit,
         taskFilter,
         getAllTasks,
-        getCompletedTasks,
         getTaskToEdit,
         getTaskFilter,
-        getPendingTasks,
         addTask,
         editTask,
         closeEditModal,

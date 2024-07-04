@@ -1,51 +1,32 @@
 <script setup>
 import Task from './Task.vue'
-
+import FilterTasks from'@/components/FilterTasks.vue'
 import { useTaskStore } from '@/stores/TaskStore'
 import { ref, watch } from 'vue';
+ import { storeToRefs } from 'pinia'
 
 const store = useTaskStore()
-const { getTaskFilter, 
-        changeTaskFilter, 
-        getCompletedTasks, 
-        getAllTasks, 
-        getPendingTasks 
-      } = store
+const {taskFilter, tasks} = storeToRefs(store);
+const { getAllTasks } = store
 
-const filterByCompletion = ref(getTaskFilter);
-const taskList = ref(getAllTasks);
+const taskList = ref(tasks);
 
-watch(filterByCompletion, ()=>{
-    changeTaskFilter(filterByCompletion.value)
-    if(filterByCompletion.value == "all"){
+watch(taskFilter, (newTaskFilter, oldTaskFilter) => {
+  if(newTaskFilter == "all"){     
       taskList.value = getAllTasks;
-    }else if(filterByCompletion.value == "completed"){
-      taskList.value = getCompletedTasks;
-    }else if(filterByCompletion.value == "pending"){
-      taskList.value = getPendingTasks;
+    }else if(newTaskFilter == "completed"){
+      taskList.value = getAllTasks.filter(task => task.completed == true);
+    }else if(newTaskFilter == "pending"){
+      taskList.value = getAllTasks.filter(task => task.completed != true);
     }
-})
+});
 
 </script>
 
 <template>
   <section class="tasklist">
-    <h2 class="tasklist-header">Tasks</h2>
-    {{ filterByCompletion }}
-    <div class="filterBtns">
-      <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="all" id="all"/>
-        <label for="all">All</label>
-      </div>
-      <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="pending" id="pending"/>
-        <label for="pending">Pending</label>
-      </div>
-      <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="completed" id="completed"/>
-        <label for="completed">Completed</label>
-      </div>     
-    </div>
+    <h2 class="tasklist-header">Tasks</h2>    
+    <FilterTasks/>
     <div>
       <ul>
       <li v-for="task in taskList" :key="task.id">
@@ -65,28 +46,6 @@ watch(filterByCompletion, ()=>{
   text-decoration: underline;
   padding: 4px;
   margin-bottom: 15px;
-}
-
-.filterBtns{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 50%;
-  margin: auto;
-  padding: 8px 4px;
-  font-size: 17px;
-  gap: 15px;
-}
-
-.filterBtn-group{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.filterBtn-group input{
-  cursor: pointer;
 }
 
 ul{
