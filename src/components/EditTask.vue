@@ -1,18 +1,30 @@
 <script setup>
 
-const props = defineProps(["handleEdit", "taskToEdit"])
+const props = defineProps(["handleEdit", "taskToEdit", "closeEditModal"])
 
 const inputValue = defineModel();
 
 inputValue.value=props.taskToEdit.name;
+
+const handleTaskEdit = (task) =>{
+    let editedTask = {
+        "id": task.id,  
+        "name": inputValue.value,
+        "completed": task.completed,
+        "markForDeletion": task.markForDeletion
+    }
+    props.handleEdit(editedTask);
+    inputValue.value = "";
+}
+
 </script>
 
 <template>
     <main class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" @click="props.closeEditModal">&times;</span>
             <h2 class="modal-header">Edit Task</h2>
-            <form class="edit-form" @submit.prevent="props.handleEdit" autocomplete="off">
+            <form class="edit-form" @submit.prevent="() => handleTaskEdit(props.taskToEdit)" autocomplete="off">
                 <input
                     class="edit-input"
                     type="text"
@@ -42,10 +54,11 @@ inputValue.value=props.taskToEdit.name;
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; 
+  margin: 8% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; 
+  width: 50%;
+  height: 50%; 
 }
 
 .modal-header{

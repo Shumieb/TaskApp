@@ -23,8 +23,15 @@ const addTask = (task) =>{
   }  
 }
 
-const handleEdit = (id) =>{ 
-    console.log(id);
+const handleEdit = (editedTask) =>{ 
+  tasks.value.map(task =>{
+    if(task.id === editedTask.id){
+      task.name = editedTask.name;
+      task.completed = editedTask.completed;
+      task.markForDeletion = editedTask.markForDeletion;
+    }
+  })
+  closeEditModal();
 }
 
 const handleComplete = (id)=>{
@@ -43,8 +50,12 @@ const handleDelete = (id) =>{
 const showEditForm = (id) =>{
   taskToEdit.value = tasks.value.find(task => task.id == id);
   displayEditFrom.value = true;
-  console.log(taskToEdit.value);
 }
+
+const closeEditModal = ()=>{
+  displayEditFrom.value = !displayEditFrom.value;
+}
+
 </script>
 
 <template>
@@ -57,6 +68,11 @@ const showEditForm = (id) =>{
       :showEditForm="showEditForm"
     />
   </main>
-  <EditTask v-if="displayEditFrom" :handleEdit="handleComplete" :taskToEdit="taskToEdit"/>
+  <EditTask 
+    v-if="displayEditFrom" 
+    :handleEdit="handleEdit" 
+    :taskToEdit="taskToEdit" 
+    :closeEditModal="closeEditModal"
+  />
 </template>
 
