@@ -4,18 +4,32 @@ import { ref, computed } from "vue";
 
 export const useTaskStore = defineStore('task', () => {
     // state properties
-    const tasks = ref(taskData)
-    const displayEditFrom = ref(false)
-    const taskToEdit = ref({})
+    const tasks = ref(taskData);
+    const displayEditFrom = ref(false);
+    const taskToEdit = ref({});
+    const taskFilter = ref("all");
 
     // getters
+    const getAllTasks = computed(() => {
+        return tasks.value;
+    })
+
     const getCompletedTasks = computed(() => {
         let completedTasks = tasks.value.filter(task => task.completed == true);
-        return completedTasks
+        return completedTasks;
+    })
+
+    const getPendingTasks = computed(() => {
+        let pendingTasks = tasks.value.filter(task => task.completed !== true);
+        return pendingTasks;
     })
 
     const getTaskToEdit = computed(() => {
         return taskToEdit.value;
+    })
+
+    const getTaskFilter = computed(() => {
+        return taskFilter.value;
     })
 
     // actions
@@ -67,17 +81,27 @@ export const useTaskStore = defineStore('task', () => {
         displayEditFrom.value = true;
     }
 
+    function changeTaskFilter(filter) {
+        if (filter == "all" || filter == "pending" || filter == "completed")
+            taskFilter.value = filter;
+    }
+
     return {
         tasks,
         displayEditFrom,
         taskToEdit,
+        taskFilter,
+        getAllTasks,
         getCompletedTasks,
         getTaskToEdit,
+        getTaskFilter,
+        getPendingTasks,
         addTask,
         editTask,
         closeEditModal,
         completeTask,
         deleteTask,
-        showEditForm
+        showEditForm,
+        changeTaskFilter
     }
 })
