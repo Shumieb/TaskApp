@@ -1,10 +1,17 @@
 <script setup>
 import { useTaskStore } from '@/stores/TaskStore'
 
+const emit = defineEmits(['taskUpdated'])
+
 const store = useTaskStore()
-const { completeTask, deleteTask, showEditForm } = store
+const { completeTask, deleteTask, showEditForm} = store
 
 const props = defineProps(["task"])
+
+const handleComplete = (id) =>{
+    completeTask(id);   
+    emit("taskUpdated"); 
+}
 
 </script>
 
@@ -15,7 +22,7 @@ const props = defineProps(["task"])
                 type="checkbox" 
                 :name="props.task.name" 
                 :checked="props.task.completed"  
-                @click="() => completeTask(props.task.id)">
+                @click="() => handleComplete(props.task.id)">
             <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
