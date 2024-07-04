@@ -1,10 +1,13 @@
 <script setup>
+import { useTaskStore } from '@/stores/TaskStore'
+import { storeToRefs } from 'pinia'
 
-const props = defineProps(["handleEdit", "taskToEdit", "closeEditModal"])
+const store = useTaskStore()
+const { taskToEdit  } = storeToRefs(store)
+const { editTask, closeEditModal, getTaskToEdit } = store
 
 const inputValue = defineModel();
-
-inputValue.value=props.taskToEdit.name;
+inputValue.value = getTaskToEdit.name;
 
 const handleTaskEdit = (task) =>{
     let editedTask = {
@@ -13,7 +16,7 @@ const handleTaskEdit = (task) =>{
         "completed": task.completed,
         "markForDeletion": task.markForDeletion
     }
-    props.handleEdit(editedTask);
+    editTask(editedTask);
     inputValue.value = "";
 }
 
@@ -22,9 +25,9 @@ const handleTaskEdit = (task) =>{
 <template>
     <main class="modal">
         <div class="modal-content">
-            <span class="close" @click="props.closeEditModal">&times;</span>
+            <span class="close" @click="closeEditModal">&times;</span>
             <h2 class="modal-header">Edit Task</h2>
-            <form class="edit-form" @submit.prevent="() => handleTaskEdit(props.taskToEdit)" autocomplete="off">
+            <form class="edit-form" @submit.prevent="() => handleTaskEdit(taskToEdit)" autocomplete="off">
                 <input
                     class="edit-input"
                     type="text"

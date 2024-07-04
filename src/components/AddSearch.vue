@@ -1,15 +1,17 @@
 <script setup>
 import { ref, defineModel } from "vue";
 import { capitalizeFirstLetter } from "@/assets/utils";
+import { useTaskStore } from '@/stores/TaskStore'
 
 const selected = ref("add");
 const disabled = ref(selected.value);
 const placeholder = ref(capitalizeFirstLetter(selected.value));
 const submitBtn = ref(capitalizeFirstLetter(selected.value));
 
-const inputValue = defineModel();
+const store = useTaskStore()
+const { addTask } = store
 
-const props = defineProps(["addTask"])
+const inputValue = defineModel();
 
 const handleBtnSwitch = (value) => {
   selected.value = value;
@@ -20,7 +22,8 @@ const handleBtnSwitch = (value) => {
 
 const handleSubmit = () => {
   if (selected.value == "add" && inputValue.value !== undefined) {
-    props.addTask(inputValue.value);
+    addTask(inputValue.value);
+    inputValue.value="";
   }
   if (selected.value == "search" && inputValue.value !== undefined) {
     console.log(inputValue.value + " - " + selected.value);

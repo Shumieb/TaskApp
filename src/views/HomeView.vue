@@ -2,13 +2,20 @@
 import { ref } from "vue";
 import AddSearch from "@/components/AddSearch.vue";
 import TaskList from "@/components/TaskList.vue";
-import { taskData } from "@/assets/data";
+//import { taskData } from "@/assets/data";
 import EditTask from "@/components/EditTask.vue"
 
-const tasks = ref(taskData)
-const displayEditFrom = ref(false)
-const taskToEdit = ref({})
+import { useTaskStore } from '@/stores/TaskStore'
+import { storeToRefs } from 'pinia'
 
+//const tasks = ref(taskData)
+//const displayEditFrom = ref(false)
+//const taskToEdit = ref({})
+
+const store = useTaskStore()
+const { displayEditFrom } = storeToRefs(store)
+
+/*
 const addTask = (task) =>{
   if(task.length > 0){
     let newId= tasks.value.length + 1;
@@ -23,7 +30,8 @@ const addTask = (task) =>{
   }  
 }
 
-const handleEdit = (editedTask) =>{ 
+
+const editTask = (editedTask) =>{ 
   tasks.value.map(task =>{
     if(task.id === editedTask.id){
       task.name = editedTask.name;
@@ -34,7 +42,11 @@ const handleEdit = (editedTask) =>{
   closeEditModal();
 }
 
-const handleComplete = (id)=>{
+const closeEditModal = ()=>{
+  displayEditFrom.value = !displayEditFrom.value;
+}
+
+const completeTask = (id)=>{
   tasks.value.map(task =>{
     if(task.id === id){
       task.completed = !task.completed;
@@ -42,7 +54,7 @@ const handleComplete = (id)=>{
   })
 }
 
-const handleDelete = (id) =>{
+const deleteTask = (id) =>{
   let newTasks = tasks.value.filter(task => task.id !== id);
   tasks.value = newTasks;
 }
@@ -52,27 +64,15 @@ const showEditForm = (id) =>{
   displayEditFrom.value = true;
 }
 
-const closeEditModal = ()=>{
-  displayEditFrom.value = !displayEditFrom.value;
-}
+*/
 
 </script>
 
 <template>
   <main class="main-container">
-    <AddSearch :addTask="addTask"/>
-    <TaskList 
-      :tasks="tasks" 
-      :handleComplete="handleComplete"
-      :handleDelete="handleDelete"
-      :showEditForm="showEditForm"
-    />
+    <AddSearch />
+    <TaskList />
   </main>
-  <EditTask 
-    v-if="displayEditFrom" 
-    :handleEdit="handleEdit" 
-    :taskToEdit="taskToEdit" 
-    :closeEditModal="closeEditModal"
-  />
+  <EditTask v-if="displayEditFrom" />
 </template>
 

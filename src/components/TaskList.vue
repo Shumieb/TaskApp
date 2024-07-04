@@ -1,7 +1,11 @@
 <script setup>
 import Task from './Task.vue'
 
-const props = defineProps(["tasks","handleComplete", "handleDelete", "showEditForm"])
+import { useTaskStore } from '@/stores/TaskStore'
+import { storeToRefs } from 'pinia'
+
+const store = useTaskStore()
+const { tasks } = storeToRefs(store)
 
 </script>
 
@@ -9,13 +13,8 @@ const props = defineProps(["tasks","handleComplete", "handleDelete", "showEditFo
   <section class="tasklist">
     <h2 class="tasklist-header">Tasks</h2>
     <ul>
-      <li v-for="task in props.tasks" :key="task.id">
-        <Task 
-          :task="task" 
-          :handleComplete="props.handleComplete"
-          :handleDelete="props.handleDelete"
-          :showEditForm="props.showEditForm"
-        />      
+      <li v-for="task in tasks" :key="task.id">
+        <Task :task="task" />      
       </li>          
     </ul>
   </section>

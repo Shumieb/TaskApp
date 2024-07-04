@@ -1,5 +1,10 @@
 <script setup>
-const props = defineProps(["task", "handleComplete", "handleDelete", "showEditForm"])
+import { useTaskStore } from '@/stores/TaskStore'
+
+const store = useTaskStore()
+const { completeTask, deleteTask, showEditForm } = store
+
+const props = defineProps(["task"])
 
 </script>
 
@@ -10,12 +15,12 @@ const props = defineProps(["task", "handleComplete", "handleDelete", "showEditFo
                 type="checkbox" 
                 :name="props.task.name" 
                 :checked="props.task.completed"  
-                @click="() => props.handleComplete(props.task.id)">
+                @click="() => completeTask(props.task.id)">
             <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
-          <button class="btn" @click="()=>props.showEditForm(props.task.id)">Edit</button>
-          <button class="btn" @click="()=>props.handleDelete(props.task.id)">Delete</button>
+          <button class="btn" @click="()=>showEditForm(props.task.id)">Edit</button>
+          <button class="btn" @click="()=>deleteTask(props.task.id)">Delete</button>
         </div>
     </div>
 </template>
