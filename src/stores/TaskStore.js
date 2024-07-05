@@ -8,6 +8,7 @@ export const useTaskStore = defineStore('myTask', () => {
     const displayEditFrom = ref(false);
     const taskToEdit = ref({});
     const taskFilter = ref("all");
+    const searchTerm = ref("");
 
     // getters
     const getAllTasks = computed(() => {
@@ -20,6 +21,10 @@ export const useTaskStore = defineStore('myTask', () => {
 
     const getTaskFilter = computed(() => {
         return taskFilter.value;
+    })
+
+    const getSearchTerm = computed(() => {
+        return searchTerm.value;
     })
 
     // actions
@@ -77,20 +82,27 @@ export const useTaskStore = defineStore('myTask', () => {
         }
     }
 
+    function updateSearchTerm(term) {
+        searchTerm.value = term;
+    }
+
     return {
         tasks,
         displayEditFrom,
+        searchTerm,
         taskToEdit,
         taskFilter,
         getAllTasks,
         getTaskToEdit,
         getTaskFilter,
+        getSearchTerm,
         addTask,
         editTask,
         closeEditModal,
         completeTask,
         deleteTask,
         showEditForm,
-        changeTaskFilter
+        changeTaskFilter,
+        updateSearchTerm
     }
 })

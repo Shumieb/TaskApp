@@ -1,18 +1,21 @@
 <script setup>
 import { useTaskStore } from '@/stores/TaskStore'
 
-const emit = defineEmits(['taskUpdated'])
-
+// values from store
 const store = useTaskStore()
 const { completeTask, deleteTask, showEditForm} = store
 
+// props
 const props = defineProps(["task"])
 
+// events
+const emit = defineEmits(['taskUpdated'])
+
+// functions
 const handleComplete = (id) =>{
     completeTask(id);   
     emit("taskUpdated"); 
 }
-
 </script>
 
 <template>

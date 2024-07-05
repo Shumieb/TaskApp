@@ -1,12 +1,12 @@
 <script setup>
-import Task from './Task.vue'
-import FilterTasks from'@/components/FilterTasks.vue'
-import { useTaskStore } from '@/stores/TaskStore'
+import Task from './Task.vue';
+import FilterTasks from'@/components/FilterTasks.vue';
+import { useTaskStore } from '@/stores/TaskStore';
 import { ref, watch } from 'vue';
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
 
 const store = useTaskStore()
-const {taskFilter, tasks} = storeToRefs(store);
+const { taskFilter, tasks, searchTerm } = storeToRefs(store);
 const { getAllTasks } = store
 
 const taskList = ref(tasks);
@@ -18,10 +18,10 @@ watch(taskFilter, (newTaskFilter, oldTaskFilter) => {
       taskList.value = getAllTasks;
       currentFilter.value = newTaskFilter;
     }else if(newTaskFilter == "completed"){
-      taskList.value = getAllTasks.filter(task => task.completed == true);
+      taskList.value = getAllTasks.filter(task => task.completed === true);
       currentFilter.value = newTaskFilter;
     }else if(newTaskFilter == "pending"){
-      taskList.value = getAllTasks.filter(task => task.completed != true);
+      taskList.value = getAllTasks.filter(task => task.completed !== true);
       currentFilter.value = newTaskFilter;
     }
 });
@@ -41,7 +41,19 @@ watch(reloadPage, (newReloadPage, oldReloadPage) =>{
     }
   }
 })
-
+/*
+watch(searchTerm, (newSearchTerm, oldSearchTerm) =>{  
+  let filter = taskFilter.value; 
+  console.log("search term update.", newSearchTerm);
+  if(filter == "all"){     
+      taskList.value = getAllTasks.filter(task => task.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
+    }else if(filter == "completed"){
+      taskList.value = getAllTasks.filter(task => task.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
+    }else if(filter == "pending"){
+      taskList.value = getAllTasks.filter(task => task.completed !== true);
+    }
+})
+*/
 const UpdateTasks = () =>{
   reloadPage.value = true;
 }
@@ -49,8 +61,7 @@ const UpdateTasks = () =>{
 
 <template>
   <section class="tasklist">
-    <h2 class="tasklist-header">Tasks</h2>    
-    <FilterTasks/>
+    <!--<h2 class="tasklist-header">Tasks</h2>-->  
     <div :v-if="taskList.length > 0">
       <ul>
       <li v-for="task in taskList" :key="task.id">

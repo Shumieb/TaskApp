@@ -14,6 +14,7 @@
 <style scoped>
 header {
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .page-header {

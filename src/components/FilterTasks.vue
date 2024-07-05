@@ -38,9 +38,13 @@ watch(filterByCompletion, ()=>{
   align-items: center;
   width: 50%;
   margin: auto;
-  padding: 8px 4px;
+  padding: 4px;
   font-size: 17px;
   gap: 15px;
+  background-color: peachpuff;
+  margin-bottom: 10px;
+  border: 2px solid peachpuff;
+  border-radius: 4px;
 }
 
 .filterBtn-group{
