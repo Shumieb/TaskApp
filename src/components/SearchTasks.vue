@@ -18,7 +18,6 @@ const emit = defineEmits(['hideSearchForm'])
 const handleSubmit = () => {
     if (inputValue.value !== undefined) {
         updateSearchTerm(inputValue.value);        
-        console.log(inputValue.value);
         inputValue.value="";
         emit('hideSearchForm');
     }else{

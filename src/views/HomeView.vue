@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import AddSearchBtns from "@/components/AddSearchBtns.vue";
 import TaskList from "@/components/TaskList.vue";
 import EditTask from "@/components/EditTask.vue";
-import AddTaskModal from "@/components/AddTaskModal.vue";
+import AddTask from "@/components/AddTask.vue";
 import SearchTasks from "@/components/SearchTasks.vue";
 import FilterTasks from "@/components/FilterTasks.vue";
 import { useTaskStore } from '@/stores/TaskStore'
@@ -28,22 +28,22 @@ const showHideSearchForm = () =>{
 </script>
 
 <template>
-  <main class="main-container">    
-    <AddSearchBtns 
-      :showHideAddTaskForm="showHideAddTaskForm" 
-      :showHideSearchForm="showHideSearchForm"
+    <main class="main-container">    
+        <AddSearchBtns 
+          :showHideAddTaskForm="showHideAddTaskForm" 
+          :showHideSearchForm="showHideSearchForm"
+        />
+        <FilterTasks/>
+        <TaskList />
+    </main>
+    <EditTask v-if="displayEditFrom" />
+    <AddTask 
+      v-if="displayAddTaskForm" 
+      @hideAddTaskForm="showHideAddTaskForm"
     />
-    <FilterTasks/>
-    <TaskList />
-  </main>
-  <EditTask v-if="displayEditFrom" />
-  <AddTaskModal 
-    v-if="displayAddTaskForm" 
-    @hideAddTaskForm="showHideAddTaskForm"
-  />
-  <SearchTasks 
-    v-if="displaySearchForm" 
-    @hideSearchForm="showHideSearchForm"
-  />
+    <SearchTasks 
+      v-if="displaySearchForm" 
+      @hideSearchForm="showHideSearchForm"
+    />
 </template>
 

@@ -1,59 +1,54 @@
 <script setup>
 import Task from './Task.vue';
-import FilterTasks from'@/components/FilterTasks.vue';
 import { useTaskStore } from '@/stores/TaskStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 
+// values from store
 const store = useTaskStore()
 const { taskFilter, tasks, searchTerm } = storeToRefs(store);
 const { getAllTasks } = store
 
+// variables
 const taskList = ref(tasks);
 const reloadPage = ref(false);
 const currentFilter = ref(taskFilter.value);
 
+// watchers
 watch(taskFilter, (newTaskFilter, oldTaskFilter) => {
-  if(newTaskFilter == "all"){     
-      taskList.value = getAllTasks;
-      currentFilter.value = newTaskFilter;
-    }else if(newTaskFilter == "completed"){
-      taskList.value = getAllTasks.filter(task => task.completed === true);
-      currentFilter.value = newTaskFilter;
-    }else if(newTaskFilter == "pending"){
-      taskList.value = getAllTasks.filter(task => task.completed !== true);
-      currentFilter.value = newTaskFilter;
-    }
+  currentFilter.value = newTaskFilter;
+  reloadPage.value = true;
 });
+
+watch(searchTerm, (newSearchTerm, oldSearchTerm) =>{    
+  reloadPage.value = true;   
+})
 
 watch(reloadPage, (newReloadPage, oldReloadPage) =>{
   if(newReloadPage){    
     let filter = taskFilter.value; 
-    taskList.value = getAllTasks;
+    let newTaskList = getAllTasks;
+    let newSearchTerm = searchTerm.value;
     reloadPage.value = false;
         
-    if(filter == "all" && currentFilter == "all"){     
-      taskList.value = getAllTasks;
-    }else if(filter == "completed"){
-      taskList.value = getAllTasks.filter(task => task.completed == true);
-    }else if(filter == "pending"){
-      taskList.value = getAllTasks.filter(task => task.completed != true);
+    if(filter == "completed"){
+      newTaskList = newTaskList.filter(task => task.completed == true)     
     }
+    
+    if(filter == "pending"){
+      newTaskList = newTaskList.filter(task => task.completed != true)     
+    }    
+
+    if(newTaskList != ""){
+        newTaskList = newTaskList.filter(task => task.name.toLowerCase()
+                                  .includes(newSearchTerm.toLowerCase()));
+    } 
+
+    taskList.value = newTaskList;
   }
 })
-/*
-watch(searchTerm, (newSearchTerm, oldSearchTerm) =>{  
-  let filter = taskFilter.value; 
-  console.log("search term update.", newSearchTerm);
-  if(filter == "all"){     
-      taskList.value = getAllTasks.filter(task => task.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
-    }else if(filter == "completed"){
-      taskList.value = getAllTasks.filter(task => task.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
-    }else if(filter == "pending"){
-      taskList.value = getAllTasks.filter(task => task.completed !== true);
-    }
-})
-*/
+
+// functions
 const UpdateTasks = () =>{
   reloadPage.value = true;
 }
@@ -61,7 +56,6 @@ const UpdateTasks = () =>{
 
 <template>
   <section class="tasklist">
-    <!--<h2 class="tasklist-header">Tasks</h2>-->  
     <div :v-if="taskList.length > 0">
       <ul>
       <li v-for="task in taskList" :key="task.id">
