@@ -43,13 +43,14 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
   align-items: center;
   width: 50%;
   margin: auto;
-  padding: 4px;
+  padding: 8px 16px;
   font-size: 17px;
   gap: 15px;
-  background-color: peachpuff;
+  background-color: aliceblue;
   margin-bottom: 10px;
-  border: 2px solid peachpuff;
+  border: 2px solid aliceblue;
   border-radius: 4px;
+  color: #024959;
 }
 
 .filterBtn-group{
@@ -61,5 +62,40 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
 
 .filterBtn-group input{
   cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .filterBtns{
+        width: 100%;
+    } 
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .filterBtns{
+        width: 100%;
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .filterBtns{
+        width: 90%;
+    } 
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .filterBtns{
+        width: 80%;
+    } 
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .filterBtns{
+        width: 70%;
+    } 
 }
 </style>

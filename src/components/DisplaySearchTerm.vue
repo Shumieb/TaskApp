@@ -21,8 +21,10 @@ const { searchTerm } = storeToRefs(store)
 </template>
 
 <style scoped>
+
 .searchValue{
     font-size: 22px;
+    color: white;
 }
 
 .searchValue .name{

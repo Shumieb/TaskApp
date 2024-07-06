@@ -35,17 +35,17 @@ const handleComplete = () =>{
             <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
-          <button class="btn" @click="handleEdit">Edit</button>
-          <button class="btn" @click="() => deleteTask(props.task.id)">Delete</button>
+          <button class="btn edit-btn" @click="handleEdit">Edit</button>
+          <button class="btn delete-btn" @click="() => deleteTask(props.task.id)">Delete</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 .task{
-    background-color: peachpuff;
+    background-color: #FFCB9A;
     width: 100%;
-    border: 2px solid peachpuff;
+    border: 2px solid #FFCB9A;
     border-radius: 4px;
     margin-bottom: 20px;
     padding: 8px 12px;
@@ -54,6 +54,7 @@ const handleComplete = () =>{
     align-items: center;
     font-size: 18px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
+    color: #024959;
 }
 
 .task:hover{
@@ -85,10 +86,21 @@ const handleComplete = () =>{
   background-color: white;
   border-radius: 4px;
   font-size: 15px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
 }
 
 .btn:hover{
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
+}
+
+.edit-btn{
+    background-color: #024959;
+    border: 2px solid #024959;
+    color: #FFCB9A;
+}
+
+.delete-btn{
+    background-color: brown;
+    border: 2px solid brown;
+    color: white;
 }
 </style>

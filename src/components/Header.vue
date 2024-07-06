@@ -14,12 +14,18 @@
 <style scoped>
 header {
   text-align: center;
-  margin-bottom: 40px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .page-header {
   font-size: 28px;
   padding: 4px;
+}
+
+.page-header:hover{
+  color: #FFCB9A;
 }
 
 .header-navbar {
@@ -32,7 +38,7 @@ header {
 }
 
 .header-navbar a:hover {
-  text-decoration: underline;
+  color: #FFCB9A;
 }
 </style>
 

@@ -49,20 +49,20 @@ const handleTaskEdit = () =>{
   width: 100%; 
   height: 100%; 
   overflow: auto; 
-  background-color: rgb(0,0,0); 
   background-color: rgba(0,0,0,0.4); 
 }
 
 .modal-content {
-    background-color: peachpuff;
+    background-color: #FFCB9A;
     padding: 12px 16px;
     width: 50%;
-    height: 50vh;
+    height: 60vh;
     margin: 10% auto; 
     border-radius: 4px;
     margin-bottom: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
     text-align: center;
+    color: #024959;
 }
 
 .modal-content:hover{
@@ -78,7 +78,7 @@ const handleTaskEdit = () =>{
 .hr hr{
     margin: auto;
     width: 100px;
-    border: 2px solid black;
+    border: 2px solid #024959;
     border-radius: 4px;
     margin-bottom: 10px;
 }
@@ -96,24 +96,28 @@ const handleTaskEdit = () =>{
 .edit-input{
     padding: 8px;
     outline: none;
-    border: 1px solid black;
+    border: 2px solid #024959;
     border-radius: 4px;
     font-size: 18px;
     width: 50%;
     margin: auto;
+    color: #024959;
+    margin-bottom: 15px;
 }
 
 .editBtn{
     padding: 8px 16px;
-    border: 1px solid black;
+    border: 2px solid #024959;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    background-color: white;
+    background-color: #024959;
+    color: #FFCB9A;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
 }
 
 .close {
-  color: #aaa;
+  color: brown;
   float: right;
   font-size: 30px;
   font-weight: bold;
@@ -121,9 +125,49 @@ const handleTaskEdit = () =>{
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #aaa;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .modal-content{
+        width: 90%;
+        margin: 20% auto; 
+    } 
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .modal-content{
+        width: 90%;
+        margin: 20% auto; 
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .modal-content{
+        width: 80%;
+        margin: 15% auto; 
+    } 
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .modal-content{
+        width: 70%;
+        margin: 10% auto; 
+    } 
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .modal-content{
+        width: 60%;
+        margin: 10% auto; 
+    } 
 }
 
 </style>

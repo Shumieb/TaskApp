@@ -15,7 +15,6 @@ const searching = ref(false);
 
 // lifecycle
 onMounted(() => {
-  console.log("first mount");
   // get data from local storage
  let storedData = localStorage.getItem("storedTasks");
 
@@ -163,7 +162,10 @@ const handleTaskUpdate = () =>{
 
 <style scoped>
 .tasklist{
-  padding: 8px 12px;
+  padding: 8px 2px;
+  width: 80%;
+  margin: auto;
+  border-radius: 4px;
 }
 
 .tasklist .tasklist-header{
@@ -173,7 +175,7 @@ const handleTaskUpdate = () =>{
 }
 
 ul{
-  width: 50%;
+  width: 100%;
   margin: auto;
 }
 
@@ -185,5 +187,41 @@ ul{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .tasklist{
+        width: 100%;
+    } 
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .tasklist{
+        width: 100%;
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .tasklist{
+        width: 90%;
+    } 
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .tasklist{
+        width: 80%;
+    } 
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .tasklist{
+        width: 70%;
+    } 
 }
 </style>

@@ -1,7 +1,13 @@
+<script setup>
+import PageHero from "@/components/PageHero.vue";
+</script>
+
 <template>
-  <div>
-    <h1>About Page</h1>
-  </div>
+  <main class="main-container">
+    <PageHero title="About"/> 
+  </main>
 </template>
 
-<style></style>
+<style scoped>
+
+</style>

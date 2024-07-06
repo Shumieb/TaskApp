@@ -71,6 +71,7 @@ section {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
+  color: #024959;
 }
 
 .btn-sect {
@@ -84,10 +85,11 @@ section {
 .btn {
   padding: 4px 12px;
   cursor: pointer;
-  background-color: peachpuff;
-  border: 2px solid peachpuff;
+  background-color: #FFCB9A;
+  border: 2px solid #FFCB9A;
   border-radius: 4px;
   font-size: 16px;
+  color: #024959;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
 }
 
@@ -99,5 +101,41 @@ section {
   border-color: brown;
   background-color: brown;
   color: white;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  section{
+        width: 100%;
+    } 
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  section{
+        width: 100%;
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  section{
+        width: 90%;
+    } 
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  section{
+        width: 80%;
+    } 
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  section{
+        width: 70%;
+    } 
 }
 </style>

@@ -7,6 +7,7 @@ import EditTask from "@/components/EditTask.vue";
 import AddTask from "@/components/AddTask.vue";
 import SearchTasks from "@/components/SearchTasks.vue";
 import FilterTasks from "@/components/FilterTasks.vue";
+import PageHero from "@/components/PageHero.vue";
 import { useTaskStore } from '@/stores/TaskStore'
 
 // variables
@@ -28,7 +29,8 @@ const showHideSearchForm = () =>{
 </script>
 
 <template>
-    <main class="main-container">    
+    <main class="main-container"> 
+      <PageHero title="Tasks"/>   
         <AddSearchBtns 
           :showHideAddTaskForm="showHideAddTaskForm" 
           :showHideSearchForm="showHideSearchForm"
