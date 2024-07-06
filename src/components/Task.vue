@@ -27,12 +27,14 @@ const handleComplete = () =>{
 <template>
     <div class="task">
         <div class="textSect">
-            <input 
+            <label class="task-check task-name">{{props.task.name}}
+                <input 
                 type="checkbox" 
                 :name="props.task.name" 
                 :checked="props.task.completed"  
                 @click="handleComplete">
-            <p class="task-name">{{props.task.name}}</p>
+                <span class="checkmark"></span>
+            </label>
         </div>        
         <div class="btnSect">
           <button class="btn edit-btn" @click="handleEdit">Edit</button>
@@ -52,7 +54,7 @@ const handleComplete = () =>{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 18px;
+    font-size: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
     color: #024959;
 }
@@ -102,5 +104,72 @@ const handleComplete = () =>{
     background-color: brown;
     border: 2px solid brown;
     color: white;
+}
+
+/* The container */
+.task-check {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.task-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.task-check .checkmark {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 18px;
+  width: 18px;
+  background-color: #026773;
+  border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.task-check:hover input ~ .checkmark {
+  background-color: #3CA6A6;
+}
+
+/* When the checkbox is checked, add a blue background */
+.task-check input:checked ~ .checkmark {
+  background-color: #024959;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.task-check .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.task-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.task-check .checkmark:after {
+  left: 6.5px;
+  top: 2.8px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 </style>
