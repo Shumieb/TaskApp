@@ -153,9 +153,24 @@ const handleTaskUpdate = () =>{
     </ul>
     </div>
     <div v-if="taskList.length <= 0">
-      <h2 v-if="taskFilter == 'all'" class="emptyList">The Task List is empty.</h2>
-      <h2 v-if="taskFilter == 'pending'" class="emptyList">There are no pending Tasks.</h2>
-      <h2 v-if="taskFilter == 'completed'" class="emptyList">There are no completed Tasks.</h2>
+      <h2 v-if="taskFilter == 'all' && !searching" class="emptyList">
+        The Task List is empty.
+      </h2>
+      <h2 v-if="taskFilter == 'all' && searching" class="emptyList">
+        The Task List does not have tasks that contain: {{ searchTerm }}.
+      </h2>
+      <h2 v-if="taskFilter == 'pending' && !searching" class="emptyList">
+        There are no pending Tasks.
+      </h2>
+      <h2 v-if="taskFilter == 'pending' && searching" class="emptyList">
+        The Task List does not have pending tasks that contain: {{ searchTerm }}.
+      </h2>
+      <h2 v-if="taskFilter == 'completed' && !searching" class="emptyList">
+        There are no completed Tasks.
+      </h2>
+      <h2 v-if="taskFilter == 'completed' && searching" class="emptyList">
+        The Task List does not have completed tasks that contain: {{ searchTerm }}.
+      </h2>
     </div>    
   </section>
 </template>

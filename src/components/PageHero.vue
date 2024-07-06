@@ -12,12 +12,12 @@ const props = defineProps(["title"])
 
 <style scoped>
 .hero{
-    background-color: aliceblue;
+    background-color: #8FC1B5;
     height: 20vh;
     width: 60%;
     margin: auto;
     margin-bottom: 20px;
-    border: 2px solid aliceblue;
+    border: 2px solid #8FC1B5;
     border-radius: 4px;
     color: #024959;
     font-size: 20px;

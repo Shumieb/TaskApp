@@ -46,9 +46,9 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
   padding: 8px 16px;
   font-size: 17px;
   gap: 15px;
-  background-color: aliceblue;
+  background-color: #8FC1B5;
   margin-bottom: 10px;
-  border: 2px solid aliceblue;
+  border: 2px solid #8FC1B5;
   border-radius: 4px;
   color: #024959;
 }
