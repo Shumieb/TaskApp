@@ -20,18 +20,24 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
 </script>
 
 <template>
-    <div class="filterBtns">
-      <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="all" id="all"/>
-        <label for="all">All</label>
+    <div class="filterBtns">      
+      <div class="filterBtn-group">   
+        <label for="all" class="container">All
+          <input type="radio" v-model="filterByCompletion" value="all" id="all"/>
+          <span class="checkmark"></span>
+        </label>        
       </div>
       <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="pending" id="pending"/>
-        <label for="pending">Pending</label>
+        <label for="pending" class="container">Pending
+          <input type="radio" v-model="filterByCompletion" value="pending" id="pending"/>
+          <span class="checkmark"></span>
+        </label>       
       </div>
       <div class="filterBtn-group">
-        <input type="radio" v-model="filterByCompletion" value="completed" id="completed"/>
-        <label for="completed">Completed</label>
+        <label for="completed" class="container">Completed
+          <input type="radio" v-model="filterByCompletion" value="completed" id="completed"/>
+          <span class="checkmark"></span>
+        </label>        
       </div>     
     </div>    
 </template>
@@ -51,13 +57,6 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
   border: 2px solid #8FC1B5;
   border-radius: 4px;
   color: #024959;
-}
-
-.filterBtn-group{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
 }
 
 .filterBtn-group input{
@@ -98,4 +97,68 @@ watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
         width: 70%;
     } 
 }
+
+/* The container */
+.filterBtn-group .container {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 20px;
+}
+
+/* Hide the browser's default radio button */
+.filterBtn-group .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.filterBtn-group .checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  height: 16px;
+  width: 16px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.filterBtn-group .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.filterBtn-group .container input:checked ~ .checkmark {
+  background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.filterBtn-group .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.filterBtn-group .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.filterBtn-group .container .checkmark:after {
+ 	top: 3px;
+	left: 2.8px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #024959;
+}
+
 </style>
