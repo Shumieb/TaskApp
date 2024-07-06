@@ -3,7 +3,7 @@ import Task from './Task.vue';
 import { taskData } from "@/assets/data";
 import { useTaskStore } from '@/stores/TaskStore';
 import { storeToRefs } from 'pinia';
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 
 // values from store
 const store = useTaskStore()
@@ -15,8 +15,24 @@ const searching = ref(false);
 
 // lifecycle
 onMounted(() => {
+  console.log("first mount");
+  // get data from local storage
+ let storedData = localStorage.getItem("storedTasks");
+
+ if(!storedData){
+  console.log("no data")
+  localStorage.setItem("storedTasks", JSON.stringify(taskData)); 
   taskList.value = taskData;
   tasks.value = taskData;
+ }else{
+  taskList.value = JSON.parse(localStorage.getItem("storedTasks") || "[]");
+  tasks.value = JSON.parse(localStorage.getItem("storedTasks") || "[]");
+ }  
+})
+
+onUnmounted(() => {
+  localStorage.removeItem("storedTasks");
+  localStorage.setItem("storedTasks", JSON.stringify(tasks.value));
 })
 
 // watchers

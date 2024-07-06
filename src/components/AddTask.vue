@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from "vue";
+import { storeToRefs } from 'pinia';
 import { useTaskStore } from '@/stores/TaskStore';
 
 // values from store
 const store = useTaskStore()
-const { addTask } = store
+const { updateTaskFilter } = store
+const { tasks } = storeToRefs(store)
 
 // variables and models
 const displayErrorMsg = ref(false);
@@ -16,8 +18,18 @@ const emit = defineEmits(['hideAddTaskForm'])
 
 // functions
 const handleSubmit = () => {
-  if (inputValue.value !== undefined) {
-      addTask(inputValue.value);
+  if (inputValue.value !== undefined) {     
+        let newId = tasks.value.length + Math.random();
+        let newTask = {
+            "id": newId,
+            "name": inputValue.value,
+            "completed": false,
+            "markForDeletion": false
+        }
+        tasks.value.push(newTask);
+        updateTaskFilter("all");
+    
+      //addTask(inputValue.value);
       inputValue.value="";
       emit('hideAddTaskForm');
   }else{
