@@ -1,31 +1,20 @@
-import { taskData } from "@/assets/data";
 import { defineStore } from 'pinia'
 import { ref, computed } from "vue";
 
-export const useTaskStore = defineStore('myTask', () => {
+export const useTaskStore = defineStore('myTasks', () => {
     // state properties
-    const tasks = ref(taskData);
-    const displayEditFrom = ref(false);
+    const tasks = ref([]);
+    const displayEditForm = ref(false);
     const taskToEdit = ref({});
     const taskFilter = ref("all");
     const searchTerm = ref("");
 
     // getters
-    const getAllTasks = computed(() => {
-        return tasks.value;
-    })
+    const getAllTasks = computed(() => tasks.value);
 
-    const getTaskToEdit = computed(() => {
-        return taskToEdit.value;
-    })
+    const getCompletedTasks = computed(() => tasks.value.filter(task => task.completed == true));
 
-    const getTaskFilter = computed(() => {
-        return taskFilter.value;
-    })
-
-    const getSearchTerm = computed(() => {
-        return searchTerm.value;
-    })
+    const getPendingTasks = computed(() => tasks.value.filter(task => task.completed != true));
 
     // actions
     function addTask(task) {
@@ -43,22 +32,15 @@ export const useTaskStore = defineStore('myTask', () => {
         }
     }
 
-    function editTask(editedTask) {
+    function editTaskName(id, name) {
         tasks.value.map(task => {
-            if (task.id === editedTask.id) {
-                task.name = editedTask.name;
-                task.completed = editedTask.completed;
-                task.markForDeletion = editedTask.markForDeletion;
+            if (task.id == id) {
+                task.name = name;
             }
         })
-        closeEditModal();
     }
 
-    function closeEditModal() {
-        displayEditFrom.value = !displayEditFrom.value;
-    }
-
-    function completeTask(id) {
+    function editTaskCompleted(id) {
         tasks.value.map(task => {
             if (task.id === id) {
                 task.completed = !task.completed;
@@ -66,17 +48,24 @@ export const useTaskStore = defineStore('myTask', () => {
         })
     }
 
-    function deleteTask(id) {
-        let newTasks = tasks.value.filter(task => task.id !== id);
-        tasks.value = newTasks;
+    const deleteTask = (id) => {
+        let newTaskList = tasks.value.filter(task => task.id != id);
+        tasks.value = newTaskList;
     }
 
-    function showEditForm(id) {
+    function updateTaskToEdit(id) {
         taskToEdit.value = tasks.value.find(task => task.id == id);
-        displayEditFrom.value = true;
     }
 
-    function changeTaskFilter(filter) {
+    function closeEditModal() {
+        displayEditForm.value = false;
+    }
+
+    function showEditModal(id) {
+        displayEditForm.value = true;
+    }
+
+    function updateTaskFilter(filter) {
         if (filter == "all" || filter == "pending" || filter == "completed") {
             taskFilter.value = filter;
         }
@@ -86,23 +75,28 @@ export const useTaskStore = defineStore('myTask', () => {
         searchTerm.value = term;
     }
 
+    function updateTasks(tasks) {
+        tasks.value = tasks;
+    }
+
     return {
         tasks,
-        displayEditFrom,
-        searchTerm,
+        displayEditForm,
         taskToEdit,
         taskFilter,
+        searchTerm,
         getAllTasks,
-        getTaskToEdit,
-        getTaskFilter,
-        getSearchTerm,
+        getCompletedTasks,
+        getPendingTasks,
         addTask,
-        editTask,
-        closeEditModal,
-        completeTask,
+        editTaskName,
+        editTaskCompleted,
         deleteTask,
-        showEditForm,
-        changeTaskFilter,
-        updateSearchTerm
+        updateTaskToEdit,
+        closeEditModal,
+        showEditModal,
+        updateTaskFilter,
+        updateSearchTerm,
+        updateTasks
     }
 })

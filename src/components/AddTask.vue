@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineModel } from "vue";
+import { ref } from "vue";
 import { useTaskStore } from '@/stores/TaskStore';
 
 // values from store
@@ -17,9 +17,9 @@ const emit = defineEmits(['hideAddTaskForm'])
 // functions
 const handleSubmit = () => {
   if (inputValue.value !== undefined) {
-    addTask(inputValue.value);
-    inputValue.value="";
-    emit('hideAddTaskForm');
+      addTask(inputValue.value);
+      inputValue.value="";
+      emit('hideAddTaskForm');
   }else{
     errorMsg.value = "please enter a new task"
     displayErrorMsg.value = true;

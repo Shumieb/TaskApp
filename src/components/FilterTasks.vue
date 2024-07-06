@@ -1,17 +1,21 @@
 <script setup>
 import { useTaskStore } from '@/stores/TaskStore'
 import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 
 // values from store
 const store = useTaskStore()
-const { getTaskFilter, changeTaskFilter } = store
+const { taskFilter } = storeToRefs(store)
+const { updateTaskFilter } = store
 
 // variables
-const filterByCompletion = ref(getTaskFilter);
+const filterByCompletion = ref(taskFilter);
 
 // watchers
-watch(filterByCompletion, ()=>{
-    changeTaskFilter(filterByCompletion.value)
+watch(filterByCompletion, (newFilterByCompletion, oldFilterByCompletion)=>{
+  if(newFilterByCompletion){
+    updateTaskFilter(filterByCompletion.value);
+  }    
 })
 </script>
 

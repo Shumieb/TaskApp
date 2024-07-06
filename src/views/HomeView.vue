@@ -15,7 +15,7 @@ const displaySearchForm = ref(false)
 
 // values from store
 const store = useTaskStore()
-const { displayEditFrom } = storeToRefs(store)
+const { displayEditForm } = storeToRefs(store)
 
 // functions
 const showHideAddTaskForm = () =>{
@@ -36,7 +36,7 @@ const showHideSearchForm = () =>{
         <FilterTasks/>
         <TaskList />
     </main>
-    <EditTask v-if="displayEditFrom" />
+    <EditTask v-if="displayEditForm" />
     <AddTask 
       v-if="displayAddTaskForm" 
       @hideAddTaskForm="showHideAddTaskForm"

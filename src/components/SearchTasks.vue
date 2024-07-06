@@ -1,23 +1,26 @@
 <script setup>
-import { defineModel, ref } from "vue";
+import { ref } from "vue";
 import { useTaskStore } from '@/stores/TaskStore';
+import { storeToRefs } from 'pinia'
 
 // values from store
 const store = useTaskStore()
-const { updateSearchTerm } = store;
+const { updateSearchTerm } = store
+const { searchTerm } = storeToRefs(store)
 
 // variables and models
 const displayErrorMsg = ref(false);
 const errorMsg = ref("");
 const inputValue = defineModel();
+inputValue.value = searchTerm.value;
 
 // events
 const emit = defineEmits(['hideSearchForm'])
 
 // functions
 const handleSubmit = () => {
-    if (inputValue.value !== undefined) {
-        updateSearchTerm(inputValue.value);        
+    if (inputValue.value !== undefined) {   
+        updateSearchTerm(inputValue.value);   
         inputValue.value="";
         emit('hideSearchForm');
     }else{

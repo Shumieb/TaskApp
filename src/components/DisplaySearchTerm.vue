@@ -8,23 +8,15 @@ const props = defineProps(["showSearchTerm"])
 
 // values from store
 const store = useTaskStore()
-const { searchTerm } = storeToRefs(store);
-
-// variables
-const searchTermValue = ref("");
-
-// watchers
-watch(searchTerm, (newSearchTerm, oldSearchTerm) => {
-    if(newSearchTerm.length > 0){
-        searchTermValue.value = newSearchTerm; 
-    }     
-});
+const { searchTerm } = storeToRefs(store)
 
 </script>
 
 <template>
     <div>
-        <h2 v-if="showSearchTerm" class="searchValue">Searching for: <span class="name">{{ searchTermValue }}</span></h2>
+        <h2 v-if="showSearchTerm" class="searchValue">
+            Searching for: <span class="name">{{ searchTerm }}</span>
+        </h2>
     </div>    
 </template>
 

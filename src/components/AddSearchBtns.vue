@@ -9,18 +9,18 @@ const props = defineProps(["showHideAddTaskForm", "showHideSearchForm"])
 
 // values from store
 const store = useTaskStore()
-const { searchTerm } = storeToRefs(store);
-const { updateSearchTerm } = store;
+const { searchTerm } = storeToRefs(store)
+const { updateSearchTerm } = store
 
 // variable
 const showSearchTerm = ref(false);
 
 // watchers
-watch(searchTerm, (newSearchTerm, oldSearchTerm) => {
-  if(newSearchTerm.length > 0){
-      showSearchTerm.value = true;
-    } 
-});
+watch(searchTerm, (newTerm, oldTerm)=>{
+  if(newTerm){
+    showSearchTerm.value = true;
+  }
+})
 
 // function
 const clearSearchTerm = () =>{

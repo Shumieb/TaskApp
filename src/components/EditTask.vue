@@ -4,23 +4,18 @@ import { storeToRefs } from 'pinia'
 
 // values from store
 const store = useTaskStore()
-const { taskToEdit  } = storeToRefs(store)
-const { editTask, closeEditModal, getTaskToEdit } = store
+const { taskToEdit } = storeToRefs(store)
+const { closeEditModal, editTaskName } = store
 
 // models
 const inputValue = defineModel();
-inputValue.value = getTaskToEdit.name;
+inputValue.value = taskToEdit.value.name;
 
 // functions
-const handleTaskEdit = (task) =>{
-    let editedTask = {
-        "id": task.id,  
-        "name": inputValue.value,
-        "completed": task.completed,
-        "markForDeletion": task.markForDeletion
-    }
-    editTask(editedTask);
+const handleTaskEdit = () =>{  
+    editTaskName(taskToEdit.value.id, inputValue.value)
     inputValue.value = "";
+    closeEditModal();
 }
 </script>
 
@@ -30,7 +25,7 @@ const handleTaskEdit = (task) =>{
             <span class="close" @click="closeEditModal">&times;</span>
             <h2 class="modal-header">Edit Task</h2>
             <span class="hr"><hr></span> 
-            <form class="edit-form" @submit.prevent="() => handleTaskEdit(taskToEdit)" autocomplete="off">
+            <form class="edit-form" @submit.prevent="() => handleTaskEdit()" autocomplete="off">
                 <input
                     class="edit-input"
                     type="text"

@@ -3,19 +3,25 @@ import { useTaskStore } from '@/stores/TaskStore'
 
 // values from store
 const store = useTaskStore()
-const { completeTask, deleteTask, showEditForm} = store
+const { editTaskCompleted, showEditModal, deleteTask, updateTaskToEdit } = store
 
 // props
 const props = defineProps(["task"])
 
 // events
-const emit = defineEmits(['taskUpdated'])
+const emit = defineEmits(['taskCompleted']);
 
 // functions
-const handleComplete = (id) =>{
-    completeTask(id);   
-    emit("taskUpdated"); 
+const handleEdit = () =>{
+    updateTaskToEdit(props.task.id);
+    showEditModal(props.task.id);
 }
+
+const handleComplete = () =>{
+    editTaskCompleted(props.task.id);
+    emit("taskCompleted");
+}
+
 </script>
 
 <template>
@@ -25,12 +31,12 @@ const handleComplete = (id) =>{
                 type="checkbox" 
                 :name="props.task.name" 
                 :checked="props.task.completed"  
-                @click="() => handleComplete(props.task.id)">
+                @click="handleComplete">
             <p class="task-name">{{props.task.name}}</p>
         </div>        
         <div class="btnSect">
-          <button class="btn" @click="()=>showEditForm(props.task.id)">Edit</button>
-          <button class="btn" @click="()=>deleteTask(props.task.id)">Delete</button>
+          <button class="btn" @click="handleEdit">Edit</button>
+          <button class="btn" @click="() => deleteTask(props.task.id)">Delete</button>
         </div>
     </div>
 </template>
