@@ -1,10 +1,9 @@
 @import './base.css';
 
 body {
-    background-color: #024959;
-    color: white;
+    background: url("https://images.pexels.com/photos/2088170/pexels-photo-2088170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center;
+    background-size: cover;
 }
-
 
 .main-container {
     width: 80%;

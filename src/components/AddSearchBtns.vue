@@ -85,8 +85,8 @@ section {
 .btn {
   padding: 4px 12px;
   cursor: pointer;
-  background-color: #FFCB9A;
-  border: 2px solid #FFCB9A;
+  background-color: #ed9192;
+  border: 2px solid #ed9192;
   border-radius: 4px;
   font-size: 16px;
   color: #024959;

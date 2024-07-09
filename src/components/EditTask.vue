@@ -53,7 +53,7 @@ const handleTaskEdit = () =>{
 }
 
 .modal-content {
-    background-color: #FFCB9A;
+    background-color: #ffb5b6;
     padding: 12px 16px;
     width: 50%;
     height: 60vh;
@@ -103,6 +103,7 @@ const handleTaskEdit = () =>{
     margin: auto;
     color: #024959;
     margin-bottom: 15px;
+    background-color: #fff3f0;
 }
 
 .editBtn{
@@ -112,7 +113,7 @@ const handleTaskEdit = () =>{
     font-size: 16px;
     cursor: pointer;
     background-color: #024959;
-    color: #FFCB9A;
+    color: #fff3f0;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
 }
 

@@ -45,9 +45,9 @@ const handleComplete = () =>{
 
 <style scoped>
 .task{
-    background-color: #FFCB9A;
+    background-color: #ed9192;
     width: 100%;
-    border: 2px solid #FFCB9A;
+    border: 2px solid #ed9192;
     border-radius: 4px;
     margin-bottom: 20px;
     padding: 8px 12px;
@@ -97,13 +97,13 @@ const handleComplete = () =>{
 .edit-btn{
     background-color: #024959;
     border: 2px solid #024959;
-    color: #FFCB9A;
+    color: #fff3f0;
 }
 
 .delete-btn{
     background-color: brown;
     border: 2px solid brown;
-    color: white;
+    color: #fff3f0;
 }
 
 /* The container */

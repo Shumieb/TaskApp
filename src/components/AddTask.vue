@@ -81,16 +81,16 @@ const hideErrorMsg = () => {
 }
 
 .modal-content {
-  background-color: #FFCB9A;
-  padding: 12px 16px;
-  width: 50%;
-  height: 60vh;
-  margin: 10% auto; 
-  border-radius: 4px;
-  margin-bottom: 15px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
-  text-align: center;
-  color: #024959;
+    background-color: #ffb5b6;
+    padding: 12px 16px;
+    width: 50%;
+    height: 60vh;
+    margin: 10% auto; 
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
+    text-align: center;
+    color: #024959;
 }
 
 .modal-content:hover{
@@ -98,7 +98,7 @@ const hideErrorMsg = () => {
 }
 
 .close {
-  color: brown;
+  color: #aaa;
   float: right;
   font-size: 30px;
   font-weight: bold;
@@ -106,7 +106,7 @@ const hideErrorMsg = () => {
 
 .close:hover,
 .close:focus {
-  color: #aaa;
+  color: brown;
   text-decoration: none;
   cursor: pointer;
 }
@@ -145,6 +145,7 @@ const hideErrorMsg = () => {
   margin: auto;
   color: #024959;
   margin-bottom: 15px;
+  background-color: #fff3f0;
 }
 
 .add-form .submitBtn {
@@ -154,7 +155,7 @@ const hideErrorMsg = () => {
   font-size: 16px;
   cursor: pointer;
   background-color: #024959;
-  color: #FFCB9A;
+  color: #fff3f0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 4px;
 }
 
